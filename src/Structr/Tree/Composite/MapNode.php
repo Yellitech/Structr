@@ -19,17 +19,17 @@ class MapNode extends Node
      * @var array Keys currently registered for this map
      */
     private $_keys = array();
-    
+
     /**
      * @var string A regular expression to match certain keys
      */
     private $_regexp_keys = array();
-    
+
     /**
      * @var array A callable to filter keys
      */
     private $_callable_keys = array();
-    
+
     /**
      * @var boolean Whether this map should be strict. A strict map throws an
      *      exception when there are keys it didn't expect.
@@ -38,7 +38,7 @@ class MapNode extends Node
 
     /**
      * Add a key to this map
-     * 
+     *
      * @param string $keyname Name of the key
      * @return \Structr\Tree\Composite\MapKeyNode
      */
@@ -53,7 +53,7 @@ class MapNode extends Node
     /**
      * Add a key-matcher to this map. Either via a callable or a
      * regular expression
-     * 
+     *
      * @param string|mixed $matcher The filter
      * @param string $name Name for the key
      * @return \Structr\Tree\Composite\MapKeyNode
@@ -85,7 +85,7 @@ class MapNode extends Node
 
     /**
      * Remove a key from this map
-     * 
+     *
      * @param string $keyName The name of the key to remove
      * @return \Structr\Tree\Composite\MapNode This node
      */
@@ -100,7 +100,7 @@ class MapNode extends Node
 
     /**
      * Reset this map. Forgetting the current state completely.
-     * 
+     *
      * @return \Structr\Tree\Composite\MapNode This node
      */
     public function clear()
@@ -116,13 +116,13 @@ class MapNode extends Node
     /**
      * Call when this map must be strict, i.e., throw an exception when there
      * are keys in the input that are not described by this map
-     * 
+     *
      * @return \Structr\Tree\Composite\MapNode This node
      */
     public function strict()
     {
         $this->_strict = true;
-        
+
         return $this;
     }
 
@@ -146,10 +146,8 @@ class MapNode extends Node
             if (isset($value[$key])) {
                 $return[$key] = $val->_walk($value[$key]);
             } elseif ($val->isOptional()) {
-                if(array_key_exists($key, $value)) {
-                    if(NullNode::canHaveNullValue($value)) {
-                        $return[$key] = null;
-                    }
+                if (array_key_exists($key, $value)) {
+                    $return[$key] = null;
                     unset($value[$key]);
                 }
                 continue;
@@ -183,7 +181,7 @@ class MapNode extends Node
                 implode(', ', array_keys($value))
             ));
         }
-        
+
         return $return;
     }
 }

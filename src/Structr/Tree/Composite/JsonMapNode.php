@@ -9,6 +9,7 @@
 namespace Structr\Tree\Composite;
 
 use Structr\Structr;
+use Exception;
 
 class JsonMapNode extends MapNode
 {
@@ -26,7 +27,7 @@ class JsonMapNode extends MapNode
      *
      * @param mixed $callable A valid PHP callable
      * @throws \Structr\Exception
-     * @return \Structr\Tree\Base\Node This node
+     * @return MapNode This node
      */
     public function post_decode($callable)
     {
